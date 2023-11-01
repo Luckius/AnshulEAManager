@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+<title>EA Manager</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="icon" type="image/png" href="../static/images/icons/favicon.ico" />
+
+<link rel="stylesheet" type="text/css" href="../static/vendor/bootstrap/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" type="text/css" href="../static/vendor/animate/animate.css">
+
+<link rel="stylesheet" type="text/css" href="../static/vendor/css-hamburgers/hamburgers.min.css">
+
+<link rel="stylesheet" type="text/css" href="../static/vendor/animsition/css/animsition.min.css">
+
+<link rel="stylesheet" type="text/css" href="../static/vendor/select2/select2.min.css">
+
+<link rel="stylesheet" type="text/css" href="../static/vendor/daterangepicker/daterangepicker.css">
+
+<link rel="stylesheet" type="text/css" href="../static/css/util.css">
+<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<meta name="robots" content="noindex, follow">
+<!--<script nonce="9e0747d3-d2b3-41e5-bbf3-62d5e7b6c556">(function(w,d){!function(bv,bw,bx,by){bv[bx]=bv[bx]||{};bv[bx].executed=[];bv.zaraz={deferred:[],listeners:[]};bv.zaraz.q=[];bv.zaraz._f=function(bz){return function(){var bA=Array.prototype.slice.call(arguments);bv.zaraz.q.push({m:bz,a:bA})}};for(const bB of["track","set","debug"])bv.zaraz[bB]=bv.zaraz._f(bB);bv.zaraz.init=()=>{var bC=bw.getElementsByTagName(by)[0],bD=bw.createElement(by),bE=bw.getElementsByTagName("title")[0];bE&&(bv[bx].t=bw.getElementsByTagName("title")[0].text);bv[bx].x=Math.random();bv[bx].w=bv.screen.width;bv[bx].h=bv.screen.height;bv[bx].j=bv.innerHeight;bv[bx].e=bv.innerWidth;bv[bx].l=bv.location.href;bv[bx].r=bw.referrer;bv[bx].k=bv.screen.colorDepth;bv[bx].n=bw.characterSet;bv[bx].o=(new Date).getTimezoneOffset();if(bv.dataLayer)for(const bI of Object.entries(Object.entries(dataLayer).reduce(((bJ,bK)=>({...bJ[1],...bK[1]})))))zaraz.set(bI[0],bI[1],{scope:"page"});bv[bx].q=[];for(;bv.zaraz.q.length;){const bL=bv.zaraz.q.shift();bv[bx].q.push(bL)}bD.defer=!0;for(const bM of[localStorage,sessionStorage])Object.keys(bM||{}).filter((bO=>bO.startsWith("_zaraz_"))).forEach((bN=>{try{bv[bx]["z_"+bN.slice(7)]=JSON.parse(bM.getItem(bN))}catch{bv[bx]["z_"+bN.slice(7)]=bM.getItem(bN)}}));bD.referrerPolicy="origin";bD.src="../../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(bv[bx])));bC.parentNode.insertBefore(bD,bC)};["complete","interactive"].includes(bw.readyState)?zaraz.init():bv.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script>-->
+
+<style>
+	
+	#loading {
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 100;
+		width: 100vw;
+		height: 100vh;
+		background-color: rgba(192, 192, 192, 0.5);
+		background-image: url("http://i.stack.imgur.com/MnyxU.gif");
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+
+	.container-contact100 {
+      display: flex;
+      /*flex-direction: column;*/
+    }
+    
+    .symbol-table {
+      margin-right: 20px;
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      vertical-align: top;
+      /*margin-top: -35%;*/
+      float: right;
+    }
+    
+    .symbol-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    .symbol-table th, .symbol-table td {
+      padding: 8px;
+      text-align: left;
+      border: 1px solid black;
+    }
+
+    .symbol-table th {
+      background-color: #f2f2f2;
+    }
+
+
+    .symbol-table {
+	  max-height: 600px; /* Set the maximum height for the container */
+	  overflow-y: auto; /* Enable vertical scrolling */
+	}
+
+
+</style>
+
+
+
+
+</head>
+<body>
+
+	<!-- Toa Pesa Wakala, Toa Pesa -->
+
+<div id="loading"></div>
+
+<div class="container-contact100">
+
+	<div id="symbol-table2" class="symbol-table">
+      <table>
+        <tr id="tr2">
+	        <th>Account</th>
+	        <th>Equity</th>
+	        <th>Symbol</th>
+	        <th>PNL</th>        
+        </tr>
+
+      </table>
+    </div>
+
+	<div id="symbol-table" class="symbol-table">
+      <table>
+        <tr id="tr1">
+          <th>SYMBOL</th>
+          <th>VALUE</th>
+        </tr>
+
+      </table>
+    </div>
+
+
+
+
+<div class="wrap-contact100">
+
+
+<!--<div style="margin-bottom: 10px;margin-top: -10px;text-align: center;">
+	<h1>EAs Management</h1>
+	<p style="padding: 10px;text-align: left;color: #000;font-size: 16px;" id="mydata"></p>
+
+	<p style="padding: 10px;text-align: left;color: #000;font-size: 16px;" id="mydata2"></p>
+
+</div>-->
+
+
+<form class="contact100-form validate-form" onsubmit="return false;">
+  <!--<span class="contact100-form-title">
+    EAs Management
+  </span>-->
+  <h2 style="margin-bottom: 30px;font-size: 15px;text-align: center;">EA Managements</h2>
+
+
+  <div class="wrap-input100 input100-select">
+    <span class="label-input100">Close Panic</span>
+    <div>
+      <select onchange="getClosePanic();" id="Close_Panic" class="selection-2" name="Close_Panic">
+        <option value="val1">TRUE</option>
+        <option value="val2">FALSE</option>
+      </select>
+    </div>
+    <span class="focus-input100"></span>
+  </div>
+
+
+  <div class="wrap-input100 input100-select">
+    <span class="label-input100">Close By Symbol</span>
+    <div>
+      <select onchange="getCloseBySymbol()" id="Close_Buy_Trend1" class="selection-2" name="Close_Buy_Trend1">
+        <option value="val1">AUDUSD</option>
+        <option value="val2">GBPUSD</option>
+        <option value="val3">CADCHF</option>
+        <option value="val4">NZDUSD</option>
+        <!--<option value="val5">ALL SYMBOLS</option>-->
+      </select>
+    </div>
+    <span class="focus-input100"></span>
+  </div>
+
+
+  <!--<div class="wrap-input100 input100-select">
+    <span class="label-input100">Close_Sell_Trend</span>
+    <div>
+      <select onchange="getCloseSellTrend()" id="Close_Sell_Trend" class="selection-2" name="Close_Sell_Trend">
+        <option value="val1">TRUE</option>
+        <option value="val2">FALSE</option>
+      </select>
+    </div>
+    <span class="focus-input100"></span>
+  </div>
+
+
+  <div class="wrap-input100 input100-select">
+    <span class="label-input100">Close_Buy_Counter</span>
+    <div>
+      <select onchange="getCloseBuyCounter()" id="Close_Buy_Counter" class="selection-2" name="Close_Buy_Counter">
+        <option value="val1">TRUE</option>
+        <option value="val2">FALSE</option>
+      </select>
+    </div>
+    <span class="focus-input100"></span>
+  </div>
+
+
+  <div class="wrap-input100 input100-select">
+    <span class="label-input100">Close_Sell_Counter</span>
+    <div>
+      <select onchange="getCloseSellCounter()" id="Close_Sell_Counter" class="selection-2" name="Close_Sell_Counter">
+        <option value="val1">TRUE</option>
+        <option value="val2">FALSE</option>
+      </select>
+    </div>
+    <span class="focus-input100"></span>
+  </div>
+
+
+
+
+  <div class="wrap-input100 input100-select">
+    <span class="label-input100">Buy_Trend</span>
+    <div>
+      <select onchange="getBuyTrend()" id="Buy_Trend" class="selection-2" name="Buy_Trend">
+        <option value="val1">TRUE</option>
+        <option value="val2">FALSE</option>
+      </select>
+    </div>
+    <span class="focus-input100"></span>
+  </div>
+
+  <div class="wrap-input100 input100-select">
+    <span class="label-input100">Sell_Trend</span>
+    <div>
+      <select onchange="getSellTrend()" id="Sell_Trend" class="selection-2" name="Sell_Trend">
+        <option value="val1">TRUE</option>
+        <option value="val2">FALSE</option>
+      </select>
+    </div>
+    <span class="focus-input100"></span>
+  </div>
+
+
+
+
+  <div class="wrap-input100 input100-select">
+    <span class="label-input100">Lot_Info</span>
+    <div>
+      <select onchange="getLotInfo()" id="Lot_Info" class="selection-2" name="Lot_Info">
+        <option value="val1">Compound</option>
+        <option value="val2">Fix Lot</option>
+      </select>
+    </div>
+    <span class="focus-input100"></span>
+  </div>
+
+
+
+
+  <div class="wrap-input100 validate-input" data-validate="Name is required">
+    <span class="label-input100">Start_Hour</span>
+    <input id="Start_Hour" class="input100" type="number" name="Start_Hour" value="0">
+    <span class="focus-input100"></span>
+  </div>
+
+
+  <div class="wrap-input100 validate-input" data-validate="Name is required">
+    <span class="label-input100">Stop_Hour</span>
+    <input id="Stop_Hour" class="input100" type="number" name="Stop_Hour" value="24">
+    <span class="focus-input100"></span>
+  </div>
+
+  <div class="wrap-input100 input100-select">
+    <span class="label-input100">Buy_Counter</span>
+    <div>
+      <select onchange="getBuyCounter()" id="Buy_Counter" class="selection-2" name="Buy_Counter">
+        <option value="val1">TRUE</option>
+        <option value="val2">FALSE</option>
+      </select>
+    </div>
+    <span class="focus-input100"></span>
+  </div>
+
+
+  <div class="wrap-input100 input100-select">
+    <span class="label-input100">Sell_Counter</span>
+    <div>
+      <select onchange="getSellCounter()" id="Sell_Counter" class="selection-2" name="Sell_Counter">
+        <option value="val1">TRUE</option>
+        <option value="val2">FALSE</option>
+      </select>
+    </div>
+    <span class="focus-input100"></span>
+  </div>
+
+
+
+  <div class="wrap-input100 validate-input" data-validate="Name is required">
+    <span class="label-input100">Lot_mode</span>
+    <input id="Lot_mode" class="input100" type="number" name="Lot_mode" value="2">
+    <span class="focus-input100"></span>
+  </div>
+
+
+  <div class="wrap-input100 validate-input" data-validate="Name is required">
+    <span class="label-input100">Manage_Lot</span>
+    <input id="Manage_Lot" class="input100" type="number" name="Manage_Lot" value="10000.0">
+    <span class="focus-input100"></span>
+  </div>
+
+  <div class="wrap-input100 validate-input" data-validate="Name is required">
+    <span class="label-input100">Fix_lot</span>
+    <input id="Fix_lot" class="input100" type="number" name="Fix_lot" value="0.01">
+    <span class="focus-input100"></span>
+  </div>
+
+
+    <div class="wrap-input100 input100-select">
+    <span class="label-input100">Close All Trades</span>
+    <div>
+      <select onchange="getCloseAllTrade()" id="Close_All_Trade" class="selection-2" name="Close_All_Trade">
+        <option value="val1">TRUE</option>
+        <option value="val2">FALSE</option>
+      </select>
+    </div>
+    <span class="focus-input100"></span>
+  </div>-->
+
+
+
+
+
+  <!--<div class="wrap-input100 validate-input" data-validate="Name is required">
+	<span class="label-input100">Authorization Password</span>
+	<input id="Password" class="input100" type="Password" name="Password" placeholder="553322" value="001">
+	<span class="focus-input100"></span>
+
+</div>-->
+
+  <!-- Submit Button -->
+	<!--<div class="container-contact100-form-btn">
+		<div class="wrap-contact100-form-btn">
+		<div class="contact100-form-bgbtn"></div>
+		<button onclick="saveToDatabase()" class="contact100-form-btn">
+		<span>
+		Update
+		<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+		</span>
+		</button>
+		</div>
+	</div>-->
+</form>
+<!--</div>
+</div>-->
+
+
+
+
+	<div style="margin-bottom: 20px;" class="container-contact100-form-btn">
+		<div class="wrap-contact100-form-btn">
+		<div class="contact100-form-bgbtn"></div>
+		<button onclick="saveToDatabase()" class="contact100-form-btn">
+		<span>
+		Update
+		<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+		</span>
+		</button>
+		</div>
+	</div>
+
+
+
+  <div class="wrap-input100 validate-input" data-validate="Name is required">
+	<span class="label-input100">Add Symbol</span>
+	<input id="addsymbol" class="input100" type="Text" name="addsymbol" placeholder="EURUSD">
+	<span class="focus-input100"></span>
+
+</div>
+
+
+<div style="width: 50%;margin-top: -30px;" class="container-contact100-form-btn">
+	<div class="wrap-contact100-form-btn">
+	<div class="contact100-form-bgbtn"></div>
+	<button onclick="addSymbol()" class="contact100-form-btn">
+	<span>
+	Add Symbol
+	<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+	</span>
+	</button>
+	</div>
+</div>
+
+
+<!--<div class="container-contact100-form-btn">
+	<div class="wrap-contact100-form-btn">
+	<div class="contact100-form-bgbtn"></div>
+	<button onclick="godeposit()" class="contact100-form-btn">
+	<span>
+	Lipa
+	<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+	</span>
+	</button>
+	</div>
+</div>-->
+
+
+
+
+</div>
+</div>
+<div id="dropDownSelect1"></div>
+
+
+
+
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script>
+
+
+    <script>
+
+        //var expired = document.getElementById("tb-if-expired");
+
+
+
+
+        </script>
+
+
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="../static/vendor/jquery/jquery-3.2.1.min.js"></script>
+
+<script src="../static/vendor/animsition/js/animsition.min.js"></script>
+
+<script src="../static/vendor/bootstrap/js/popper.js"></script>
+<script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="../static/vendor/select2/select2.min.js"></script>
+<script>
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+
+<script src="../static/vendor/daterangepicker/moment.min.js"></script>
+<script src="../static/vendor/daterangepicker/daterangepicker.js"></script>
+
+<script src="../static/vendor/countdowntime/countdowntime.js"></script>
+
+<!--<script src="../static/js/main.js"></script>-->
+<script src="../static/js/app.js"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+<!--<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"7a7cce9b7f939d04","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.2.0","si":100}' crossorigin="anonymous"></script>-->
+</body>
+
+</html>

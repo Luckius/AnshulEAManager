@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!--<link rel="stylesheet" href="../static/css/FontAwesome/css/fontawesome.min.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+<div class="table_responsive">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>></th>
+          <!--<th>Image</th>-->
+          <th>Symbol</th>
+          <th>Broker</th>
+          <th>Direction</th>
+          <th>Equity</th>
+          <th>Floating PNL</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>></td>
+          <!--<td><img src="https://freetoolssite.com/wp-content/uploads/2022/02/846799.png.webp" alt=""></td>-->
+          <td>AUDUSD</td>
+          <td></td>
+          <td>Long</td>
+          <td>0.0</td>
+          <td>0.0</td>
+          <td>Stopped</td>
+          <td>
+
+            <div class="icons-de"> 
+              <button >
+                <i class="fa-solid fa-play" style="color: #048130;"></i>
+              </button>
+
+              <button>
+                <i class="fa-solid fa-stop" style="color: #d20423;"></i>
+              </button>
+            </div>
+
+            <!--<span class="action_btn">
+              <a href="#">Edit</a>
+              <a href="#">Remove</a>
+            </span>-->
+          </td>
+        </tr>
+
+        <tr>
+          <td>></td>
+          <!--<td><img src="https://freetoolssite.com/wp-content/uploads/2022/02/webp-to-png.png.webp" alt="">--></td>
+          <td>GBPUSD</td>
+          <td></td>
+          <td>Short</td>
+          <td>0.0</td>
+          <td>0.0</td>
+          <td>Stopped</td>
+          <td>
+
+            <div class="icons-de"> 
+              <button >
+                <i class="fa-solid fa-play" style="color: #048130;"></i>
+              </button>
+
+              <button>
+                <i class="fa-solid fa-stop" style="color: #d20423;"></i>
+              </button>
+            </div>
+
+          </td>
+        </tr>
+
+
+        <tr>
+          <td>></td>
+          <!--<td><img src="https://freetoolssite.com/wp-content/uploads/2022/02/youtube.png.webp" alt=""></td>-->
+          <td>CADCHF</td>
+          <td></td>
+          <td>Long</td>
+          <td>0.0</td>
+          <td>0.0</td>
+          <td>Stopped</td>
+          <td>
+
+            <div class="icons-de"> 
+              <button >
+                <i class="fa-solid fa-play" style="color: #048130;"></i>
+              </button>
+
+              <button>
+                <i class="fa-solid fa-stop" style="color: #d20423;"></i>
+              </button>
+            </div>
+
+          </td>
+        </tr>
+
+
+
+        <tr>
+          <td>></td>
+          <!--<td><img src="https://freetoolssite.com/wp-content/uploads/2022/02/youtube.png.webp" alt=""></td>-->
+          <td>NZDCHF</td>
+          <td></td>
+          <td>Short</td>
+          <td>0.0</td>
+          <td>0.0</td>
+          <td>Stopped</td>
+          <td>
+
+            <div class="icons-de"> 
+              <button >
+                <i class="fa-solid fa-play" style="color: #048130;"></i>
+              </button>
+
+              <button>
+                <i class="fa-solid fa-stop" style="color: #d20423;"></i>
+              </button>
+            </div>
+
+          </td>
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<ul>
+ <a id="h-link1"  href="{{url_for('home')}}">Home </a>
+ <a id="h-link2"  href="{{url_for('symbols')}}">Symbols</a>
+ <a id="h-link2"  href="{{url_for('login')}}">Logout</a>  
+</ul>
+
+
+</body>
+</html>

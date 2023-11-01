@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!--<link rel="stylesheet" href="../static/css/FontAwesome/css/fontawesome.min.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css"></link>
+
+
+
+</head>
+<body>
+
+
+
+
+
+<div class="table_responsive">
+
+  <!--<button id="add-btn">
+    Add Symbol
+  </button>-->
+
+  <button class="button-33" role="button">Add</button>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>No</th>
+          <!--<th>Image</th>-->
+          <th>Symbol</th>
+          <th>Direction (Long/Short/)</th>
+          <th>Operation</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>01</td>
+          <!--<td><img src="https://freetoolssite.com/wp-content/uploads/2022/02/846799.png.webp" alt=""></td>-->
+          <td>AUDUSD</td>
+          <td>Both</td>
+
+          <td>
+
+            <div class="icons-de"> 
+              <button >
+                <i class='far fa-edit' style='font-size:15px'></i>
+              </button>
+
+              <button>
+                <i class='fas fa-trash' style='font-size:15px;color:red'></i>
+              </button>
+            </div>
+
+            <!--<span class="action_btn">
+              <a href="#">Edit</a>
+              <a href="#">Remove</a>
+            </span>-->
+          </td>
+        </tr>
+
+        <tr>
+          <td>02</td>
+          <!--<td><img src="https://freetoolssite.com/wp-content/uploads/2022/02/webp-to-png.png.webp" alt="">--></td>
+          <td>GBPUSD</td>
+          <td>Short Only</td>
+   
+          <td>
+
+            <div class="icons-de"> 
+              <button >
+                <i class='far fa-edit' style='font-size:15px'></i>
+              </button>
+
+              <button>
+                <i class='fas fa-trash' style='font-size:15px;color:red'></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td>03</td>
+          <!--<td><img src="https://freetoolssite.com/wp-content/uploads/2022/02/youtube.png.webp" alt=""></td>-->
+          <td>CADCHF</td>
+          <td>Both</td>
+    
+          <td>
+
+            <div class="icons-de"> 
+              <button >
+                <i class='far fa-edit' style='font-size:15px'></i>
+              </button>
+
+              <button>
+                <i class='fas fa-trash' style='font-size:15px;color:red'></i>
+              </button>
+            </div>
+
+          </td>
+        </tr>
+
+
+
+        <tr>
+          <td>04</td>
+          <!--<td><img src="https://freetoolssite.com/wp-content/uploads/2022/02/youtube.png.webp" alt=""></td>-->
+          <td>NZDCHF</td>
+          <td>Long Only</td>
+       
+          <td>
+
+            <div class="icons-de"> 
+              <button >
+                <i class='far fa-edit' style='font-size:15px'></i>
+              </button>
+
+              <button>
+                <i class='fas fa-trash' style='font-size:15px;color:red'></i>
+              </button>
+            </div>
+
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<ul>
+  <a id="h-link1"  href="{{url_for('home')}}">Home </a> 
+  <a id="h-link2"  href="{{url_for('accounts')}}">Accounts</a>
+  <a id="h-link2"  href="{{url_for('login')}}">Logout</a> 
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freedom2023 EA Manager</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css"></link>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<style>
+body {
+    color: #404E67;
+    /*background: #F5F7FA;*/
+    background-color: rgb(238, 238, 238);
+    font-family: 'Open Sans', sans-serif;
+}
+.table-wrapper {
+    width: 450px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;	
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.table-title {
+    padding-bottom: 10px;
+    margin: 0 0 10px;
+}
+.table-title h2 {
+    margin: 6px 0 0;
+    font-size: 22px;
+}
+.table-title .add-new {
+    float: right;
+    height: 30px;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: none;
+    min-width: 100px;
+    border-radius: 50px;
+    line-height: 13px;
+}
+.table-title .add-new i {
+    margin-right: 4px;
+}
+table.table {
+    table-layout: fixed;
+}
+table.table tr th, table.table tr td {
+    border-color: #e9e9e9;
+}
+table.table th i {
+    font-size: 13px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+
+table.table th:first-child {
+    width: 140px;
+}
+
+table.table th:last-child {
+    width: 100px;
+}
+
+
+table.table td a {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 5px;
+    min-width: 24px;
+}    
+table.table td a.add {
+    color: #27C46B;
+}
+table.table td a.edit {
+    color: #FFC107;
+}
+table.table td a.delete {
+    color: #E34724;
+}
+table.table td i {
+    font-size: 19px;
+}
+table.table td a.add i {
+    font-size: 24px;
+    margin-right: -1px;
+    position: relative;
+    top: 3px;
+}    
+table.table .form-control {
+    height: 32px;
+    line-height: 32px;
+    box-shadow: none;
+    border-radius: 2px;
+}
+table.table .form-control.error {
+    border-color: #f50000;
+}
+table.table td .add {
+    display: none;
+}
+
+
+
+table.table th:hover {
+    color: #F0C993;
+    cursor: pointer;
+}
+
+
+
+table.table th{
+    background-color: #4458bd;
+}
+
+
+
+
+.search{
+        float:right;
+        margin:7px;
+    }
+         
+.search button{
+    background-color: #000;
+    color: #f2f2f2;
+    float: right;
+    padding: 5px 10px;
+    margin-right: 16px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+/* styling navlist */
+#navlist {
+    background-color: #0074D9;
+    position: absolute;
+    width: 100%;
+}
+ 
+/* styling navlist anchor element */
+#navlist a {
+    float:left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 15px;
+}
+.navlist-right{
+    float:right;
+}
+ 
+/* hover effect of navlist anchor element */
+#navlist a:hover {
+    background-color: #ddd;
+    color: black;
+}
+ 
+/* styling search bar */
+.search input[type=text]{
+    width:300px;
+    height:25px;
+    border-radius:25px;
+    border: none;
+ 
+}
+  
+
+
+
+#add-button{
+    height: 20px;
+    margin-left: 70%;
+    padding-top: 1%;
+    padding-bottom: 20px;
+} 
+
+
+#add-btn{
+    padding-bottom: 10px;
+    font-size: 10px;
+    background-color: #4458bd;
+}      
+
+
+
+#h-link2{
+  margin-left: 5%;
+}
+
+#h-link3{
+  margin-left: 5%;
+}
+
+
+
+
+@media (max-width: 576px){
+    .col-sm-4 {
+        width: 30%;
+    }
+
+    .table-wrapper {
+        width: 380px;
+    }
+
+
+    table.table th:first-child {
+        width: 55px;
+    }
+
+
+    table.table th:nth-child(2){
+      width: 75px;
+    }
+
+
+    table.table th:last-child {
+        width: 70px;
+    }
+
+    #add-button{
+        margin-left: 60%;
+        padding-top: 1%;
+        padding-bottom: 2%;
+        margin-bottom: 10px;
+
+
+
+    } 
+
+    #add-btn{
+        padding-bottom: 10px;
+        font-size: 10px;
+        background-color: #4458bd;
+        height: 40px;
+        
+    }  
+
+    
+
+}
+
+
+
+
+/* css for menu*/
+
+  * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        font-family: sans-serif;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #4458bd;
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-logo {
+        font-size: 30px;
+        font-weight: 500;
+        color: white;
+    }
+
+
+
+    .nav-menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-item {
+        margin-left: 3rem;
+    }
+
+    .nav-link{
+        font-size: 19px;
+
+        color: white;
+    }
+
+    .nav-link:hover{
+        color: #1ae5f7;
+    }
+
+
+    .hamburger {
+        display: none;
+    }
+
+    .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: white;
+    }
+
+
+
+    @media only screen and (max-width: 668px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 5rem;
+        flex-direction: column;
+        background-color: #4458bd;
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        text-align: center;
+        transition: 0.3s;
+
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 2.5rem 0;
+
+    }
+
+
+.hamburger {
+    display: block;
+    cursor: pointer;
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(1) {
+    -webkit-transform: translateY(8px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(3) {
+    -webkit-transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.tooltip{display: none;}
+
+
+
+</style>
+
+
+</head>
+<body>
+
+
+ <nav class="navbar">
+  <a href="{{url_for('home')}}" class="nav-logo">Freedom2023</a>
+
+  <div id="hamburger" class="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+</div>
+
+  <ul id="nav-menu" class="nav-menu">
+   <li class="nav-item">
+     <a href="{{url_for('home')}}" class="nav-link">Home</a>
+   </li>
+
+   <li class="nav-item">
+     <a href="{{url_for('account')}}" class="nav-link">Accounts</a>
+   </li>
+
+   <li class="nav-item">
+     <a href="{{url_for('login')}}" class="nav-link">Logout</a>
+   </li>
+
+  </ul>
+
+ </nav>
+
+
+<div id="container-lg" style="margin-top: 3%;" class="container-lg">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div style="background-color: black;display: none;" class="row">
+
+                    <div style="visibility: hidden;" class="search">
+                        <form action="#">
+                            <input type="text"
+                                   placeholder=" Search"
+                                   name="search">
+                            <button>
+                                <i class="fa fa-search"
+                                   style="font-size: 18px;">
+                                </i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="add-button" class="col-sm-4">
+                    <button id="add-btn" type="button" class="btn btn-info add-new">
+                        <i class="fa fa-plus">
+                        </i> Add Symbol
+                    </button>
+                </div>
+
+            </div>
+            <table id="myTable" class="table table-bordered">
+                <thead style="background-color: #00bcd4;">
+                    <tr style="color: white;">
+                        <th title="Sort" onclick="sortTable(0)">Symbol<span id="span1">▼</span></th>
+                        <th title="Sort" onclick="sortTable(1)">Long/Short/ Both<span id="span2">▼</span></th>
+                        <th title="Sort" onclick="sortTable(2)">Action<span id="span3">▼</span></th>
+                    </tr>
+                </thead>
+                <tbody id="databody">
+                    <!--<tr>
+                        <td>AUDUSD</td>
+                        <td>Both</td>
+                        <td>
+                            <a class="add" title="Update" data-toggle="tooltip">
+                                <i class="fa-solid fa-floppy-disk fa-xs" style="color: #0de74f;"></i>
+                            </a>
+                            <a class="edit" title="Edit" data-toggle="tooltip">
+                                <i style="color: #000" class="material-icons">&#xE254;</i>
+                            </a>
+                            <a class="delete" title="Delete">
+                                <i class="material-icons">&#xE872;</i>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>GBPUSD</td>
+                        <td>Short Only</td>
+                     
+                        <td>
+                            <a class="add" title="Update" data-toggle="tooltip">
+                                <i class="fa-solid fa-floppy-disk fa-xs" style="color: #0de74f;"></i>
+                            </a>
+
+                            <a class="edit" title="Edit" data-toggle="tooltip"><i style="color: #000" class="material-icons">&#xE254;</i></a>
+                            <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CADCHF</td>
+                        <td>Both</td>
+              
+                        <td>
+                            <a class="add" title="Update" data-toggle="tooltip">
+                                <i class="fa-solid fa-floppy-disk fa-xs" style="color: #0de74f;"></i>
+                            </a>
+
+                            <a class="edit" title="Edit" data-toggle="tooltip"><i style="color: #000" class="material-icons">&#xE254;</i></a>
+                            <a class="delete" title="Delete"><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>NZDCHF</td>
+                        <td>Long Only</td>
+                    
+                        <td>
+                            <a class="add" title="Update" data-toggle="tooltip">
+                                <i class="fa-solid fa-floppy-disk fa-xs" style="color: #0de74f;"></i>
+                            </a>
+
+                            <a class="edit" title="Edit" data-toggle="tooltip"><i style="color: #000" class="material-icons">&#xE254;</i></a>
+                            <a class="delete" title="Delete"><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                    </tr>-->
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script>
+
+
+<script type="text/javascript">
+  
+
+  //Menus
+  const hamburger = document.querySelector(".hamburger");
+  const navMenu = document.querySelector(".nav-menu");
+  const navLink = document.querySelectorAll(".nav-link");
+
+  var containerLgID = document.getElementById('container-lg');
+  var addButtonID = document.getElementById('add-button');
+
+    var navMenuID = document.getElementById('nav-menu');
+    //navMenuID.style.display = "none";
+
+
+
+  hamburger.addEventListener("click", mobileMenu);
+  navLink.forEach(n => n.addEventListener("click", closeMenu));
+
+  function mobileMenu() {
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("active");
+      
+      $(document).ready(function(){
+        if ($('.hamburger').hasClass('active') ) {
+            containerLgID.style.display = "none";
+            addButtonID.style.display = "none";
+            console.log("opened");
+          }else{
+            containerLgID.style.display = "block";
+            addButtonID.style.display = "block";
+            console.log("closed");
+          }
+        });
+
+  }
+
+  function closeMenu() {
+      hamburger.classList.remove("active");
+      navMenu.classList.remove("active");
+      //console.log("closed");
+      //containerLgID.style.display = "block";
+  }
+
+
+
+  function sortTable(columnIndex) {
+    var mySpan = document.getElementById("span1");
+    var mySpan2 = document.getElementById("span2");
+    var mySpan3 = document.getElementById("span3");
+    
+    //▼
+
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchCount = 0;
+    table = document.getElementById("myTable");
+    switching = true;
+    // Set the sorting direction to ascending
+    dir = "asc";
+    
+    while (switching) {
+      switching = false;
+      rows = table.rows;
+      
+      for (i = 1; i < (rows.length - 1); i++) {
+        shouldSwitch = false;
+        x = rows[i].getElementsByTagName("td")[columnIndex];
+        y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+        
+        if (dir === "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            mySpan.textContent = "▼";
+            mySpan2.textContent = "▼";
+            mySpan3.textContent = "▼";
+            break;
+          }
+        } else if (dir === "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            mySpan.textContent = "▲";
+            mySpan2.textContent = "▲";
+            mySpan3.textContent = "▲";
+            break;
+          }
+        }
+      }
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        switchCount++;
+      } else {
+        if (switchCount === 0 && dir === "asc") {
+          dir = "desc";
+          switching = true;
+          mySpan.textContent = "▼";
+          mySpan2.textContent = "▼";
+          mySpan3.textContent = "▼";
+        }
+      }
+    }
+  }
+
+
+
+</script>
+
+
+
+<script>
+
+var firebaseConfig = {
+    apiKey: "AIzaSyAsqNEmJruurMvi03ycdQgxLQdO95wpWiM",
+    authDomain: "easmanagement-52782.firebaseapp.com",
+    databaseURL: "https://easmanagement-52782-default-rtdb.firebaseio.com",
+    projectId: "easmanagement-52782",
+    storageBucket: "easmanagement-52782.appspot.com",
+    messagingSenderId: "343583306103",
+    appId: "1:343583306103:web:c8008df6e954482d043172",
+    measurementId: "G-DHQ88EVSF8"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics(); 
+
+const database = firebase.database();
+const SymbolsRef = database.ref('/Symbols');
+
+var selectedDirection;
+var selectedSymbol;
+
+var selectID ;
+var selectID1;
+var symbolList;
+var userID;
+
+
+
+
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/v8/firebase.User
+    var uid = user.uid;
+    userID = uid;
+    getSymbolData();
+    // ...
+  } else {
+    //location.replace("http://localhost:5000/login");
+    location.replace("https://myeamanager-0bcaf00bab72.herokuapp.com/login");
+  }
+});
+
+
+
+
+
+
+
+    function closeAlert(){
+       swal.close(); 
+    }
+
+
+
+
+
+    function setWidthBasedOnScreen() {
+      if (window.innerWidth <= 576) {
+        selectID1.style.width = "90px";
+      }
+    }
+
+
+
+
+    function setWidthBasedOnScreen1() {
+      if (window.innerWidth <= 576) {
+        selectID1.style.width = "90px";
+        selectID.style.width = "75px";
+      }
+    }
+
+
+    function saveSymbolToDB(){
+        //var selectedDirection = selectID1.value;
+        //var selectedSymbol = selectID.value;
+        console.log("Direction: "+selectedDirection);
+        console.log("Symbol: "+selectedSymbol);
+
+        var data = {
+          "symbol":selectedSymbol,
+          "direction":selectedDirection,
+          "status":"Stopped",
+          "PNL":"0.0",
+          "Eqt":"0.0"
+        }
+        SymbolsRef.child(selectedSymbol).update(data)
+    }
+
+
+    
+
+    function getSymbolData(){
+
+      SymbolsRef.once('value', snapshot => {
+          if (snapshot) {
+            symbolList = [];
+            var data = snapshot.val();
+            if(data != null){
+                Object.keys(data).forEach(function(key) {
+                    var childData = data[key];
+                    //console.log(childData.symbol);
+                    //addDataFromDb(childData.symbol,childData.direction);
+                    symbolList.push({ symbol: childData.symbol, direction: childData.direction });
+
+                });
+
+                //addDataFromDb();
+            }
+            addDataFromDb();
+            //if(symbolList == undefined){actionsReady();}
+          }
+      });
+
+      console.log(symbolList);
+      if(symbolList == undefined){
+        addDataFromDb();
+      }
+
+    }
+
+
+
+
+    function addDataFromDb(){
+        var tbody = document.getElementById("databody");
+        tbody.innerHTML = '';
+        // create elements
+        if(symbolList != undefined){
+            symbolList.forEach(item => {
+            const symbol = item.symbol;
+            const direction = item.direction;
+            //console.log(`Symbol: ${symbol}, Direction: ${direction}`);
+            var newRow = document.createElement("tr");
+            newRow.innerHTML = '<td>'+symbol+'</td><td>'+direction+'</td><td><a class="add" title="Update" data-toggle="tooltip"><i class="fa-solid fa-floppy-disk fa-xs" style="color: #0de74f;"></i></a><a class="edit" title="Edit" data-toggle="tooltip"><i style="color: #000" class="material-icons">&#xE254;</i></a><a class="delete" title="Delete"><i class="material-icons">&#xE872;</i></a></td>';
+            
+            tbody.appendChild(newRow);
+
+            });
+        }else{
+            console.log("no symbolList");
+            var newRow = document.createElement("tr");
+            newRow.innerHTML = '<td>'+'AUDUSD'+'</td><td>'+'Both'+'</td><td><a class="add" title="Update" data-toggle="tooltip"><i class="fa-solid fa-floppy-disk fa-xs" style="color: #0de74f;"></i></a><a class="edit" title="Edit" data-toggle="tooltip"><i style="color: #000" class="material-icons">&#xE254;</i></a><a class="delete" title="Delete"><i class="material-icons">&#xE872;</i></a></td>';
+            
+            tbody.appendChild(newRow);
+        }
+
+
+    }
+
+
+
+
+
+//function actionsReady(){
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+    //var actions = $("table td:last-child").html();
+    
+    $(".add-new").click(function(){
+
+        var actions = $("table td:last-child").html();
+
+        $(this).attr("disabled", "disabled");
+        var index = $("table tbody tr:last-child").index();
+
+        var row = '<tr>' +
+            '<td><select id="selectSymbol" style="height:40px;width:120px;border-radius: 25px;border: 2px solid #609;" class="form-control symbol-select"><option value="EURUSD">EURUSD</option><option value="GBPJPY">GBPJPY</option><option value="USDCHF">USDCHF</option><option value="USDJPY">USDJPY</option><option value="AUDUSD">AUDUSD</option><option value="GBPUSD">GBPUSD</option><option value="CADCHF">CADCHF</option><option value="NZDCHF">NZDCHF</option></select></td>' +
+            '<td><select id="selectSymbol1" style="height:40px;width:130px;border-radius: 25px;border: 2px solid #609;" class="form-control direction-select"><option value="Both">Both</option><option value="Long Only">Long Only</option><option value="Short Only">Short Only</option></select></td>' +
+            '<td>' + actions + '</td>' +
+        '</tr>';
+        $("table").append(row);        
+        $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+        $("table tbody tr").eq(index + 1).find(".delete").show(); // Show the delete button for the new row
+        $('[data-toggle="tooltip"]').tooltip();
+
+        selectID1 = document.getElementById("selectSymbol1");
+        selectID  = document.getElementById("selectSymbol")
+
+        setWidthBasedOnScreen1();
+        window.addEventListener("resize", setWidthBasedOnScreen1);
+
+        console.log(actions);
+        
+    });
+
+    // ... (other event handlers)
+    
+    // Add row on add button click
+    $(document).on("click", ".add", function(){
+        var empty = false;
+        var select = $(this).parents("tr").find('select');
+        select.each(function(){
+            if($(this).val() === ''){
+                $(this).addClass("error");
+                empty = true;
+            } else{
+                $(this).removeClass("error");
+            }
+        });
+        $(this).parents("tr").find(".error").first().focus();
+        if(!empty){
+            select.each(function(){
+                var selectedOption = $(this).find("option:selected").text();
+                $(this).parent("td").html(selectedOption);
+            });            
+            $(this).parents("tr").find(".add, .edit").toggle();
+            $(this).parents("tr").find(".delete").show(); // Show the delete button for the edited row
+            $(".add-new").removeAttr("disabled");
+            selectedDirection = selectID1.value;
+            if(selectID != undefined){
+               selectedSymbol = selectID.value; 
+            }
+            saveSymbolToDB();
+        }       
+    });
+
+    // Edit row on edit button click
+    $(document).on("click", ".edit", function(){        
+        var directionCell = $(this).parents("tr").find("td:nth-child(2)");
+        var symbolCell = $(this).parents("tr").find("td:nth-child(1)");
+        var directionValue = directionCell.text();
+        var symbolValue = symbolCell.text();
+        
+        directionCell.html('<select id="selectSymbol1" style="height:40px;width:130px;border-radius: 25px;border: 2px solid #609;" class="form-control direction-select"><option value="Both">Both</option><option value="Long Only">Long Only</option><option value="Short Only">Short Only</option></select>');
+        
+        var directionSelect = directionCell.find(".direction-select");
+        directionSelect.val(directionValue);
+        
+        $(this).parents("tr").find(".add, .edit").toggle();
+        $(".add-new").attr("disabled", "disabled");
+
+        selectID1 = document.getElementById("selectSymbol1");
+
+        setWidthBasedOnScreen();
+        window.addEventListener("resize", setWidthBasedOnScreen);
+
+        console.log(selectID1.value);
+        console.log(symbolValue);
+        selectedSymbol = symbolValue;
+
+        
+    });
+
+    // Delete row on delete button click
+    $(document).on("click", ".delete", function(){
+    swal({
+      title: "Are you sure?",
+      text: "This data will be deleted from the list",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+      closeOnConfirm: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        $(this).parents("tr").remove();
+        $(this).tooltip('hide');
+        $(".add-new").removeAttr("disabled");
+        var mSymbolCell = $(this).parents("tr").find("td:nth-child(1)");
+        var mSymbolValue = mSymbolCell.text();
+        SymbolsRef.child(mSymbolValue).remove()
+        .then(function() {
+            console.log('Data deleted successfully.');
+            console.log("deleted: "+mSymbolValue);
+          })
+        
+        setTimeout(closeAlert,1500);
+        swal("Data been deleted!", {
+          icon: "success",
+          closeOnConfirm: true,
+        });
+      } else {
+        swal("Didn't delete any data");
+        setTimeout(closeAlert,1500);
+      }
+    });
+        
+    });
+
+    // ... (other event handlers)
+});
+
+
+
+//}
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
