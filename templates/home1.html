@@ -661,7 +661,7 @@ $(document).ready(function(){
    </li>
 
    <li class="nav-item">
-     <a href="/" class="nav-link">Logout</a>
+     <a onclick="SignOut()" href="#" class="nav-link">Logout</a>
    </li>
 
   </ul>
@@ -973,11 +973,19 @@ $(document).ready(function(){
       } else {
         //location.replace("http://localhost:5000/login");
         //location.replace("https://myeamanager-0bcaf00bab72.herokuapp.com/login");
-        location.replace("http://85.90.245.83");
+        location.replace("http://85.90.245.83/login");
       }
     });
 
 
+    function SignOut(){
+        firebase.auth().signOut().then(() => {
+          // Sign-out successful.
+          location.replace("http://85.90.245.83/login");
+        }).catch((error) => {
+          // An error happened.
+        });
+    }
 
 
 
