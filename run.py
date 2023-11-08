@@ -72,13 +72,16 @@ def getdata():
 		if children:
 			for key, value in children.items():
 				if key not in symbols_list:
-					symbols_list.append(key)
 					sts = SymbolRef.child(key).child("status").get()
 					drn = SymbolRef.child(key).child("direction").get()
-					status_list.append(sts)
-					direction_list.append(drn)
+					if sts != None:
+						symbols_list.append(key)
+						status_list.append(sts)
+						direction_list.append(drn)
 
-		print(status_list)
+		print(symbols_list)
+		#print(status_list)
+		#print(direction_list)
 		allowed_symbols = '_'.join(symbols_list)
 		symbols_status = '_'.join(status_list)
 		my_direction = '_'.join(direction_list)
@@ -86,13 +89,18 @@ def getdata():
 		print(mql_data)
 		mPNL = mql_data["PNL"]
 		Eqt = mql_data["Eqt"]
-		mql_symbol = mql_data["symbol"]
+		mql_symbol0 = mql_data["symbol"]
 		mql_balance = mql_data["balance"]
 		mql_equity = mql_data["equity"]
 		account = mql_data["account"]
+
+		symbol_broker_list = mql_symbol0.split("**")
+		mql_symbol = symbol_broker_list[0]
+		broker = symbol_broker_list[1]
 		#symbol_ref = db.reference('Accounts/'+str(account)+"/"+mql_symbol)
 		if mql_symbol.upper() in symbols_list:
 			symbol_ref = db.reference('Symbols/'+mql_symbol.upper())
+			symbol_ref.child("Accounts").update({"account":account})
 
 			input_string = mPNL
 			pairs = input_string.split("and")
@@ -103,8 +111,9 @@ def getdata():
 			        symbol, number = parts
 			        symbol_number_dict[symbol] = number
 			for symbol, number in symbol_number_dict.items():
-			    #print(f"Symbol: {symbol}, Number: {number}")
-			    SymbolRef.child(symbol.upper()).update({"PNL":number,"Eqt":number})
+			    #checkStatus = symbol_ref.child("status").get()
+			    #if checkStatus:
+			    SymbolRef.child(symbol.upper()).update({"PNL":number,"Eqt":number,"broker":broker})
 			resStatus = symbol_ref.child("status").get()
 			resDirection = symbol_ref.child("direction").get()
 			resSymbol = symbol_ref.child("symbol").get()
