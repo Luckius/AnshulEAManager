@@ -15,6 +15,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 body {
     color: #404E67;
@@ -1059,7 +1060,10 @@ function sortTable(columnIndex) {
 
     var symbolList;
 
+    var DisplayObject = {};
+    //var DisplayList = [];
 
+    var lastAccountDisplay;
 
     var userID;
 
@@ -1075,7 +1079,7 @@ function sortTable(columnIndex) {
       } else {
         //location.replace("http://localhost:5000/login");
         //location.replace("https://myeamanager-0bcaf00bab72.herokuapp.com/login");
-        location.replace("http://85.90.245.83/login");
+        //location.replace("http://85.90.245.83/login");
       }
     });
 
@@ -1106,7 +1110,9 @@ function SignOut(){
                     PNL: childData.PNL,
                     status:childData.status,
                     Eqt:childData.Eqt,
-                    direction:childData.direction
+                    direction:childData.direction,
+                    Accounts:childData.Accounts,
+                    broker:childData.broker
                 });
 
             });
@@ -1122,7 +1128,7 @@ function SignOut(){
 
 
    function addDataFromDb(){
-        console.log(symbolList);
+        //console.log(symbolList);
         var tbody = document.getElementById("databody");
         tbody.innerHTML = '';
         // create elements
@@ -1132,25 +1138,46 @@ function SignOut(){
         const direction = item.direction;
         const PNL = item.PNL;
         const Eqt = item.Eqt;
-        //const direction = item.direction; //onclick="expandCollapse0()"
-        //console.log(`Symbol: ${symbol}, Direction: ${direction}`);
+        const broker = item.broker;
+        var AccountsList = item.Accounts;
+        //console.log(AccountsList);
+
         var newRow = document.createElement("tr");
         var newRow2 = document.createElement(symbol);
         newRow2.classList.add(symbol);
         newRow2.id = symbol;
-        newRow.innerHTML = '<td class="mSymbol"><small style="color: blue;">></small>'+symbol+'</td><td></td><td>'+direction+'</td><td>'+Eqt+'</td><td>'+PNL+'</td><td>'+status+'</td><td><div class="icons-de"><a ><i id="playID" class="fa-solid fa-play" style="color: #048130;"></i></a><a><i id="stopID" class="fa-solid fa-stop" style="color: #d20423;"></i></a></div></td>';
 
-        newRow2.innerHTML = '<td><p href="#" style="margin-left: 10px;">Accounts</p><p href="#" style="margin-left: 10px;">557788</p><p href="#" style="margin-left: 10px;">889944</p><p href="#" style="margin-left: 10px;">509834</p></td>';
-        
-        tbody.appendChild(newRow);
-        tbody.appendChild(newRow2);
+        var symboElm = document.getElementById(symbol);
 
-        var mNewRow2 = document.getElementById(symbol);
-        mNewRow2.style.display = 'none';
+        if(symbol != undefined){
+            newRow.innerHTML = '<td class="mSymbol"><small style="color: blue;">></small>'+symbol+'</td><td>'+broker+'</td><td>'+direction+'</td><td>'+Eqt+'</td><td>'+PNL+'</td><td>'+status+'</td><td><div class="icons-de"><a ><i id="playID" class="fa-solid fa-play" style="color: #048130;"></i></a><a><i id="stopID" class="fa-solid fa-stop" style="color: #d20423;"></i></a></div></td>';
+            if(AccountsList != undefined){
+                const account = AccountsList.account;
+                newRow2.innerHTML = '<td><p href="#" style="margin-left: 10px;">Accounts</p><p href="#" style="margin-left: 10px;">'+account+'</p></td>';
+
+            }
+
+            
+            tbody.appendChild(newRow);
+            tbody.appendChild(newRow2);
+
+            var mNewRow2 = document.getElementById(symbol);
+            mNewRow2.style.display = 'none';
+            //console.log(DisplayObject);
+            //console.log(DisplayObject[symbol]);
+
+            if(DisplayObject[symbol] == 'block'){
+                mNewRow2.style.display = 'block';
+
+            }/*else{
+                mNewRow2.style.display = 'none'; 
+            }*/
+        }
 
         });
 
         //var symbolCell = $(this).parents("tr").find("td:nth-child(1)");
+
     }
 
 
@@ -1181,9 +1208,17 @@ function SignOut(){
             var symboElm = document.getElementById(resSymbol);
             if(symboElm.style.display == 'none'){
                 symboElm.style.display = 'block';
-                //console.log(symboElm);
+                
+                DisplayObject[resSymbol] = symboElm.style.display;
+                console.log(symboElm.style.display);
+                
             }else{
-               symboElm.style.display = 'none'; 
+                
+                symboElm.style.display = 'none';
+                //if(symboElm.style.display == 'block'){
+                    DisplayObject[resSymbol] = symboElm.style.display;
+                    console.log(symboElm.style.display);
+                //}
             }
         }
         
@@ -1213,9 +1248,11 @@ function SignOut(){
         var data = {
           "status":"Stopped"
         }
-        SymbolsRef.child(resSymbol).update(data)
+        SymbolsRef.child(resSymbol).update(data);
+        swal("Closing your trades please wait for seconds to communicate with MT4...");
         
     });
+
 
 
 

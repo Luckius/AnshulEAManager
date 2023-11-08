@@ -672,7 +672,7 @@ firebase.auth().onAuthStateChanged((user) => {
   } else {
     //location.replace("http://localhost:5000/login");
     //location.replace("https://myeamanager-0bcaf00bab72.herokuapp.com/login");
-    location.replace("http://85.90.245.83/login");
+    //location.replace("http://85.90.245.83/login");
   }
 });
 
@@ -728,7 +728,9 @@ function SignOut(){
           "PNL":"0.0",
           "Eqt":"0.0"
         }
-        SymbolsRef.child(selectedSymbol).update(data)
+        if(selectedSymbol != undefined){
+            SymbolsRef.child(selectedSymbol).update(data)
+        }
     }
 
 
@@ -775,12 +777,15 @@ function SignOut(){
             const symbol = item.symbol;
             const direction = item.direction;
             //console.log(`Symbol: ${symbol}, Direction: ${direction}`);
-            var newRow = document.createElement("tr");
-            newRow.innerHTML = '<td>'+symbol+'</td><td>'+direction+'</td><td><a class="add" title="Update" data-toggle="tooltip"><i class="fa-solid fa-floppy-disk fa-xs" style="color: #0de74f;"></i></a><a class="edit" title="Edit" data-toggle="tooltip"><i style="color: #000" class="material-icons">&#xE254;</i></a><a class="delete" title="Delete"><i class="material-icons">&#xE872;</i></a></td>';
-            
-            tbody.appendChild(newRow);
+            if(symbol != undefined){
+                var newRow = document.createElement("tr");
+                newRow.innerHTML = '<td>'+symbol+'</td><td>'+direction+'</td><td><a class="add" title="Update" data-toggle="tooltip"><i class="fa-solid fa-floppy-disk fa-xs" style="color: #0de74f;"></i></a><a class="edit" title="Edit" data-toggle="tooltip"><i style="color: #000" class="material-icons">&#xE254;</i></a><a class="delete" title="Delete"><i class="material-icons">&#xE872;</i></a></td>';
+                
+                tbody.appendChild(newRow);
+            }
 
             });
+            
         }else{
             console.log("no symbolList");
             var newRow = document.createElement("tr");
@@ -809,7 +814,7 @@ $(document).ready(function(){
         var index = $("table tbody tr:last-child").index();
 
         var row = '<tr>' +
-            '<td><select id="selectSymbol" style="height:40px;width:120px;border-radius: 25px;border: 2px solid #609;" class="form-control symbol-select"><option value="EURUSD">EURUSD</option><option value="GBPJPY">GBPJPY</option><option value="USDCHF">USDCHF</option><option value="USDJPY">USDJPY</option><option value="AUDUSD">AUDUSD</option><option value="GBPUSD">GBPUSD</option><option value="CADCHF">CADCHF</option><option value="NZDCHF">NZDCHF</option></select></td>' +
+            '<td><select id="selectSymbol" style="height:40px;width:120px;border-radius: 25px;border: 2px solid #609;" class="form-control symbol-select"><option value="EURUSD">EURUSD</option><option value="GBPJPY">GBPJPY</option><option value="USDCHF">USDCHF</option><option value="USDJPY">USDJPY</option><option value="AUDUSD">AUDUSD</option><option value="GBPUSD">GBPUSD</option><option value="CADCHF">CADCHF</option><option value="NZDCHF">NZDCHF</option><option value="NZDUSD">NZDUSD</option></select></td>' +
             '<td><select id="selectSymbol1" style="height:40px;width:130px;border-radius: 25px;border: 2px solid #609;" class="form-control direction-select"><option value="Both">Both</option><option value="Long Only">Long Only</option><option value="Short Only">Short Only</option></select></td>' +
             '<td>' + actions + '</td>' +
         '</tr>';
