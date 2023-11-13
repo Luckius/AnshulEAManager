@@ -100,7 +100,7 @@ def getdata():
 		#symbol_ref = db.reference('Accounts/'+str(account)+"/"+mql_symbol)
 		if mql_symbol.upper() in symbols_list:
 			symbol_ref = db.reference('Symbols/'+mql_symbol.upper())
-			symbol_ref.child("Accounts").update({"account":account})
+			symbol_ref.child("Accounts/"+str(account)).update({"account":str(account)})
 
 			input_string = mPNL
 			pairs = input_string.split("and")
@@ -113,7 +113,12 @@ def getdata():
 			for symbol, number in symbol_number_dict.items():
 			    #checkStatus = symbol_ref.child("status").get()
 			    #if checkStatus:
-			    SymbolRef.child(symbol.upper()).update({"PNL":number,"Eqt":number,"broker":broker})
+			    SymbolRef.child(symbol.upper()).update({
+			    	"PNL":number,"Eqt":number,"broker":broker
+			    })
+			    SymbolRef.child(symbol.upper()).child("Accounts/"+str(account)).update({
+			    	"PNL":number,"Eqt":number,"broker":broker
+			    })
 			resStatus = symbol_ref.child("status").get()
 			resDirection = symbol_ref.child("direction").get()
 			resSymbol = symbol_ref.child("symbol").get()

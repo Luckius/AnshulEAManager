@@ -24,7 +24,7 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 .table-wrapper {
-    width: 650px;
+    width: 750px;
     margin: 30px auto;
     background: #fff;
     padding: 20px;  
@@ -1077,9 +1077,9 @@ function sortTable(columnIndex) {
         getSymbolData();
         // ...
       } else {
-        //location.replace("http://localhost:5000/login");
+        location.replace("http://localhost:5000/login");
         //location.replace("https://myeamanager-0bcaf00bab72.herokuapp.com/login");
-        location.replace("http://85.90.245.83/login");
+        //location.replace("http://85.90.245.83/login");
       }
     });
 
@@ -1102,9 +1102,11 @@ function SignOut(){
           if (snapshot) {
             symbolList = [];
             var data = snapshot.val();
+            //console.log(data);
             Object.keys(data).forEach(function(key) {
                 var childData = data[key];
-                //console.log(childData);
+                //console.log(childData["Accounts"]);
+
                 symbolList.push({ 
                     symbol: childData.symbol,
                     PNL: childData.PNL,
@@ -1114,6 +1116,11 @@ function SignOut(){
                     Accounts:childData.Accounts,
                     broker:childData.broker
                 });
+
+                /*Object.keys(childData).forEach(function(key2) {
+                    var childData2 = childData[key2];
+
+                });*/
 
             });
 
@@ -1140,26 +1147,36 @@ function SignOut(){
         const Eqt = item.Eqt;
         const broker = item.broker;
         var AccountsList = item.Accounts;
-        //console.log(AccountsList);
+        console.log(AccountsList);
 
         var newRow = document.createElement("tr");
         var newRow2 = document.createElement(symbol);
         newRow2.classList.add(symbol);
         newRow2.id = symbol;
-
         var symboElm = document.getElementById(symbol);
 
         if(symbol != undefined){
             newRow.innerHTML = '<td class="mSymbol"><small style="color: blue;">></small>'+symbol+'</td><td>'+broker+'</td><td>'+direction+'</td><td>'+Eqt+'</td><td>'+PNL+'</td><td>'+status+'</td><td><div class="icons-de"><a ><i id="playID" class="fa-solid fa-play" style="color: #048130;"></i></a><a><i id="stopID" class="fa-solid fa-stop" style="color: #d20423;"></i></a></div></td>';
             if(AccountsList != undefined){
-                const account = AccountsList.account;
-                newRow2.innerHTML = '<td><p href="#" style="margin-left: 10px;">Accounts</p><p href="#" style="margin-left: 10px;">'+account+'</p></td>';
+                var mAccounts = "";
+                Object.keys(AccountsList).forEach(function(key) {
+                    var childData2 = AccountsList[key];
+                    var mbroker = childData2.broker;
+                    //const account = AccountsList.account;
+                    //mAccounts = mAccounts+''+key+' - '+mbroker+'<br>';
+                    mAccounts = mAccounts+''+key+'<br>';
+                    //console.log(mbroker);
+                    
+                });
+
+                newRow2.innerHTML = '<td style="width=1000px;"><p href="#" style="margin-left: 10px;">Accounts</p><p href="#" style="margin-left: 10px;">'+mAccounts+'</p></td>';
 
             }
 
             
             tbody.appendChild(newRow);
             tbody.appendChild(newRow2);
+            
 
             var mNewRow2 = document.getElementById(symbol);
             mNewRow2.style.display = 'none';
