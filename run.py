@@ -82,9 +82,9 @@ def getdata():
 		print(symbols_list)
 		#print(status_list)
 		#print(direction_list)
-		allowed_symbols = '_'.join(symbols_list)
-		symbols_status = '_'.join(status_list)
-		my_direction = '_'.join(direction_list)
+		allowed_symbols = '-'.join(symbols_list)
+		symbols_status = '-'.join(status_list)
+		my_direction = '-'.join(direction_list)
 		mql_data = request.get_json()
 		print(mql_data)
 		mPNL = mql_data["PNL"]
