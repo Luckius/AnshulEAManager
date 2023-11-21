@@ -70,6 +70,11 @@ var buyPnl;
 
 
 
+function goHome(){
+  window.replace = "{{url_for(home)}}"
+}
+
+
 //console.log("data called here");
 retriveData();
 function retriveData() {

@@ -107,7 +107,7 @@ table.table th:hover {
     cursor: pointer;
 }
 
-table.table th:nth-child(3){
+/*table.table th:nth-child(3){
   width: 65px;
 }
 
@@ -118,7 +118,7 @@ table.table th:nth-child(4){
 
 table.table th:nth-child(5){
   width: 70px;
-}
+}*/
 
 
 
@@ -271,6 +271,11 @@ table.table th{
         font-size: 30px;
         font-weight: 500;
         color: white;
+    }
+
+
+    .nav-logo:hover {
+        color: #ffc107;
     }
 
 
@@ -763,7 +768,7 @@ function expandCollapse(){
                         <th onclick="sortTable(0)">Symbol<span id="span1">▼</span></th>
                         <th onclick="sortTable(1)">Broker<span id="span2">▼</span></th>
                         <th onclick="sortTable(2)">Dir<span id="span3">▼</span></th>
-                        <th onclick="sortTable(3)">Eqt<span id="span4">▼</span></th>
+                       
                         <th onclick="sortTable(4)">PNL<span id="span5">▼</span></th>
                         <th onclick="sortTable(5)">status<span id="span6">▼</span></th>
                         <th onclick="sortTable(6)">Action<span id="span7"></span></th>
@@ -775,7 +780,7 @@ function expandCollapse(){
                         <td onclick="expandCollapse0()"><small style="color: blue;">></small>AUDUSD</td>
                         <td></td>
                         <td>Both</td>
-                        <td>1.2</td>
+                        
                         <td>2.3</td>
                         <td>Stopped</td>
                         <!--<td>(171) 555-2222</td>-->
@@ -1156,7 +1161,7 @@ function SignOut(){
         var symboElm = document.getElementById(symbol);
 
         if(symbol != undefined){
-            newRow.innerHTML = '<td class="mSymbol"><small style="color: blue;">></small>'+symbol+'</td><td>'+broker+'</td><td>'+direction+'</td><td>'+Eqt+'</td><td>'+PNL+'</td><td>'+status+'</td><td><div class="icons-de"><a ><i id="playID" class="fa-solid fa-play" style="color: #048130;"></i></a><a><i id="stopID" class="fa-solid fa-stop" style="color: #d20423;"></i></a></div></td>';
+            newRow.innerHTML = '<td class="mSymbol"><small style="color: blue;">></small>'+symbol+'</td><td>'+broker+'</td><td>'+direction+'</td><td>'+PNL+'</td><td>'+status+'</td><td><div class="icons-de"><a ><i id="playID" class="fa-solid fa-play" style="color: #048130;"></i></a><a><i id="stopID" class="fa-solid fa-stop" style="color: #d20423;"></i></a></div></td>';
             if(AccountsList != undefined){
                 var mAccounts = "";
                 Object.keys(AccountsList).forEach(function(key) {

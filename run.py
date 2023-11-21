@@ -14,6 +14,9 @@ firebase_admin.initialize_app(cred, {
 ref_account = "0"
 parameter_ref = db.reference('Parameters')
 Change_ref = db.reference('Changes')
+SymbolRef = db.reference('Symbols')
+
+#allowed_symbols = ""
 
 
 
@@ -23,55 +26,206 @@ Change_ref = db.reference('Changes')
 
 
 
-@app.route('/',methods=['GET','POST'])
+"""@app.route('/',methods=['GET','POST'])
 def index():
-    return render_template("index1.html")
+    return render_template("index1.html")"""
+
+
+
+
+@app.route('/',methods=['GET','POST'])
+def home():
+    return render_template("home1.html")
+
+
+@app.route('/login',methods=['GET','POST'])
+def login():
+    return render_template("index.html")
+
+
+@app.route('/symbols',methods=['GET','POST'])
+def symbols():
+    return render_template("symbols.html")
+
+
+@app.route('/account',methods=['GET','POST'])
+def account():
+    return render_template("accountpage.html")
+
+
+
+
+@app.route('/test',methods=['GET','POST'])
+def test():
+    return render_template("test.html")
+
+
 
 
 @app.route('/getdata',methods=['GET','POST'])
 def getdata():
 	if request.method == "POST":
+		symbols_list = []
+		status_list = []
+		direction_list = []
+		children = SymbolRef.get()
+		if children:
+			for key, value in children.items():
+				if key not in symbols_list:
+					sts = SymbolRef.child(key).child("status").get()
+					drn = SymbolRef.child(key).child("direction").get()
+					if sts != None:
+						symbols_list.append(key)
+						status_list.append(sts)
+						direction_list.append(drn)
+
+		#print(symbols_list)
+		#print(status_list)
+		#print(direction_list)
+		allowed_symbols = '-'.join(symbols_list)
+		symbols_status = '-'.join(status_list)
+		my_direction = '-'.join(direction_list)
 		mql_data = request.get_json()
 		#print(mql_data)
-		buy_pnl_list = mql_data["buypnl"].split("and")
-		sell_pnl_list = mql_data["sellpnl"].split("and")
-		mql_symbol = mql_data["symbol"]
+		print(allowed_symbols)
+		mPNL = mql_data["PNL"]
+		Eqt = mql_data["Eqt"]
+		mql_symbol0 = mql_data["symbol"]
 		mql_balance = mql_data["balance"]
 		mql_equity = mql_data["equity"]
 		account = mql_data["account"]
-		#ref_account = buy_pnl_list[0]
-		accounts_ref = db.reference('Accounts/'+str(account)+"/"+mql_symbol)
-		save_symbol = "";
-		if '_' in mql_symbol:
-			symbol_lst = mql_symbol.split(mql_symbol)
-			save_symbol = symbol_lst[0]
+
+		symbol_broker_list = mql_symbol0.split("**")
+		mql_symbol = symbol_broker_list[0]
+		broker = symbol_broker_list[1]
+		#symbol_ref = db.reference('Accounts/'+str(account)+"/"+mql_symbol)
+		if mql_symbol.upper() in symbols_list:
+			symbol_ref = db.reference('Symbols/'+mql_symbol.upper())
+			symbol_ref.child("Accounts/"+str(account)).update({"account":str(account)})
+
+			input_string = mPNL
+			pairs = input_string.split("and")
+			symbol_number_dict = {}
+			for pair in pairs:
+			    parts = pair.split("_")
+			    if len(parts) == 2:
+			        symbol, number = parts
+			        symbol_number_dict[symbol] = number
+			for symbol, number in symbol_number_dict.items():
+			    #checkStatus = symbol_ref.child("status").get()
+			    #if checkStatus:
+			    SymbolRef.child(symbol.upper()).update({
+			    	"PNL":number,"Eqt":number,"broker":broker
+			    })
+			    SymbolRef.child(symbol.upper()).child("Accounts/"+str(account)).update({
+			    	"PNL":number,"Eqt":number,"broker":broker
+			    })
+			resStatus = symbol_ref.child("status").get()
+			resDirection = symbol_ref.child("direction").get()
+			resSymbol = symbol_ref.child("symbol").get()
+			
+			res = jsonify({
+				"status":resStatus,
+	        	"direction":resDirection,
+	        	"symbol":resSymbol,
+	        	"symbolList":allowed_symbols,
+	        	"statusList":symbols_status,
+	        	"directionList":my_direction
+			})
+			return res
 		else:
-			save_symbol = mql_symbol
-		accounts_ref.update({
-			"currentSymbol":save_symbol,
-			"AccountBalance":mql_balance,
-			"AccountEquity":mql_equity,
-			"buyTradeSymbol":buy_pnl_list[1],
-			"buyTradePnl":buy_pnl_list[2],
-			"sellTradeSymbol":sell_pnl_list[1],
-			"sellTradePnl":sell_pnl_list[2]
-		})
-		#print(buy_pnl_list)
-		#print(sell_pnl_list)
-		Fix_lot = parameter_ref.child("Fix_lot").get()
-		#Close_All_Trade = parameter_ref.child("ALL SYMBOLS").child("ClosePanicText").get()
-		ClosePanicText = parameter_ref.child(save_symbol).child("ClosePanicText").get()
-		CloseBySymbol = parameter_ref.child(save_symbol).child("CloseBySymbol").get()
-		#if Close_All_Trade == "TRUE":
-			#parameter_ref.update({"Close_All_Trade":"FALSE"})
-			#"Close_All_Trade":Close_All_Trade
-		res = jsonify({
-			"ClosePanicText":ClosePanicText,
-        	"CloseBySymbol":CloseBySymbol   	
-		})
-		return res
+			res = jsonify({
+				"status":"noSymbol",
+	        	"direction":"noSymbol",
+	        	"symbol":"noSymbol",
+	        	"symbolList":"noSymbol",
+	        	"statusList":"noSymbol",
+	        	"direction" :"noSymbol" 	
+			})
+			return res
+
 	else:
 		return render_template("index.html")
+
+
+
+
+
+@app.route('/deinit',methods=['GET','POST'])
+def deinit():
+	if request.method == "POST":
+		symbols_list = []
+		status_list = []
+		direction_list = []
+		children = SymbolRef.get()
+		if children:
+			for key, value in children.items():
+				if key not in symbols_list:
+					sts = SymbolRef.child(key).child("status").get()
+					drn = SymbolRef.child(key).child("direction").get()
+					if sts != None:
+						symbols_list.append(key)
+						status_list.append(sts)
+						direction_list.append(drn)
+
+		print("**************DEINIT*************************")
+		
+		allowed_symbols = '-'.join(symbols_list)
+		symbols_status = '-'.join(status_list)
+		my_direction = '-'.join(direction_list)
+		mql_data = request.get_json()
+		mPNL = mql_data["PNL"]
+		Eqt = mql_data["Eqt"]
+		mql_symbol0 = mql_data["symbol"]
+		mql_balance = mql_data["balance"]
+		mql_equity = mql_data["equity"]
+		account = mql_data["account"]
+
+		symbol_broker_list = mql_symbol0.split("**")
+		mql_symbol = symbol_broker_list[0]
+		broker = symbol_broker_list[1]
+		#symbol_ref = db.reference('Accounts/'+str(account)+"/"+mql_symbol)
+		if mql_symbol.upper() in symbols_list:
+			#symbol_ref = db.reference('Symbols/'+mql_symbol.upper())
+			#symbol_ref.child("Accounts/"+str(account)).update({"account":str(account)})
+
+			input_string = mPNL
+			pairs = input_string.split("and")
+			symbol_number_dict = {}
+			for pair in pairs:
+			    parts = pair.split("_")
+			    if len(parts) == 2:
+			        symbol, number = parts
+			        symbol_number_dict[symbol] = number
+			for symbol, number in symbol_number_dict.items():
+			    SymbolRef.child(symbol.upper()).child("Accounts/"+str(account)).delete()
+
+			
+			res = jsonify({
+				"status":"resStatus",
+	        	"direction":"resDirection"
+	        	
+			})
+			return res
+		else:
+			res = jsonify({
+				"status":"noSymbol",
+	        	"direction":"noSymbol",
+	        	"symbol":"noSymbol",
+	        	"symbolList":"noSymbol",
+	        	"statusList":"noSymbol",
+	        	"direction" :"noSymbol" 	
+			})
+			return res
+
+	else:
+		return render_template("index.html")
+
+
+
+
+
+
 
 
 
@@ -170,6 +324,7 @@ if __name__ == '__main__':
 4. Show the floating PnL by currency pair for each account
 5. Set Listen on Web Server to 'true' by default
 6. Fixing all the bugs found for the first 4 requirements in the price you quoted?
+
 
 
 """
