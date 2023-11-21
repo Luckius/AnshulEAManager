@@ -3,13 +3,13 @@
 
 
 <head>
-<title>Freedom2023 EA Manager</title>
+<title>EA Manager</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="icon" type="image/png" href="../static/images/icons/favicon.ico" />
 
-<!--<link rel="stylesheet" type="text/css" href="../static/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../static/vendor/bootstrap/css/bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 
@@ -23,20 +23,15 @@
 
 <link rel="stylesheet" type="text/css" href="../static/vendor/daterangepicker/daterangepicker.css">
 
-<link rel="stylesheet" type="text/css" href="../static/css/util.css">-->
+<link rel="stylesheet" type="text/css" href="../static/css/util.css">
 <link rel="stylesheet" type="text/css" href="../static/css/main.css">
 
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <meta name="robots" content="noindex, follow">
+<!--<script nonce="9e0747d3-d2b3-41e5-bbf3-62d5e7b6c556">(function(w,d){!function(bv,bw,bx,by){bv[bx]=bv[bx]||{};bv[bx].executed=[];bv.zaraz={deferred:[],listeners:[]};bv.zaraz.q=[];bv.zaraz._f=function(bz){return function(){var bA=Array.prototype.slice.call(arguments);bv.zaraz.q.push({m:bz,a:bA})}};for(const bB of["track","set","debug"])bv.zaraz[bB]=bv.zaraz._f(bB);bv.zaraz.init=()=>{var bC=bw.getElementsByTagName(by)[0],bD=bw.createElement(by),bE=bw.getElementsByTagName("title")[0];bE&&(bv[bx].t=bw.getElementsByTagName("title")[0].text);bv[bx].x=Math.random();bv[bx].w=bv.screen.width;bv[bx].h=bv.screen.height;bv[bx].j=bv.innerHeight;bv[bx].e=bv.innerWidth;bv[bx].l=bv.location.href;bv[bx].r=bw.referrer;bv[bx].k=bv.screen.colorDepth;bv[bx].n=bw.characterSet;bv[bx].o=(new Date).getTimezoneOffset();if(bv.dataLayer)for(const bI of Object.entries(Object.entries(dataLayer).reduce(((bJ,bK)=>({...bJ[1],...bK[1]})))))zaraz.set(bI[0],bI[1],{scope:"page"});bv[bx].q=[];for(;bv.zaraz.q.length;){const bL=bv.zaraz.q.shift();bv[bx].q.push(bL)}bD.defer=!0;for(const bM of[localStorage,sessionStorage])Object.keys(bM||{}).filter((bO=>bO.startsWith("_zaraz_"))).forEach((bN=>{try{bv[bx]["z_"+bN.slice(7)]=JSON.parse(bM.getItem(bN))}catch{bv[bx]["z_"+bN.slice(7)]=bM.getItem(bN)}}));bD.referrerPolicy="origin";bD.src="../../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(bv[bx])));bC.parentNode.insertBefore(bD,bC)};["complete","interactive"].includes(bw.readyState)?zaraz.init():bv.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script>-->
 
 <style>
-
-
-	body{
-    	background-color: #white !important;
-    }
-
 	
 	#loading {
 		display: none;
@@ -53,27 +48,11 @@
 	}
 
 
-
-
-.container-contact100{
-	background-color: rgb(238, 238, 238);
-}
-
-
-@media (max-width: 176px){
-    body{
-    	background-color: rgb(238, 238, 238);
-
-    }
-
-}
-
-
 </style>
 
 
 </head>
-<body style="background-color: rgb(238, 238, 238);">
+<body>
 
 	<!-- Toa Pesa Wakala, Toa Pesa -->
 
@@ -85,15 +64,14 @@
 
 <form class="contact100-form validate-form" onsubmit="return false;">
 <span class="contact100-form-title">
-Sign In
+EA Management
 </span>
 <div class="wrap-input100 validate-input" data-validate="Name is required">
-<span class="label-input100">Email</span>
-<input id="emailID" class="input100" type="email" name="Risk_in_money" placeholder="forexea@gmail.com">
+<span class="label-input100">Risk_in_money</span>
+<input id="Risk_in_money" class="input100" type="number" name="Risk_in_money" value ="1000">
 <span class="focus-input100"></span>
 </div>
-
-<!--<div class="wrap-input100 validate-input" data-validate="Kuanzia Tsh 1000">
+<div class="wrap-input100 validate-input" data-validate="Kuanzia Tsh 1000">
 <span class="label-input100">Target_Persen</span>
 <input id="Target_Persen" class="input100" type="number" name="Target_Persen" value ="1000">
 <span class="focus-input100"></span>
@@ -108,11 +86,11 @@ Sign In
 </select>
 </div>
 <span class="focus-input100"></span>
-</div>-->
+</div>
 
 <div class="wrap-input100 validate-input" data-validate="Name is required">
-<span class="label-input100">Password</span>
-<input id="passID" class="input100" type="Password" name="agentno">
+<span class="label-input100">Authorization Password</span>
+<input id="agentID" class="input100" type="Password" name="agentno" placeholder="553322" value="001">
 <span class="focus-input100"></span>
 </div>
 
@@ -120,9 +98,9 @@ Sign In
 <div class="container-contact100-form-btn">
 <div class="wrap-contact100-form-btn">
 <div class="contact100-form-bgbtn"></div>
-<button style="background-color: #4458bd" onclick="SignIn()" class="contact100-form-btn">
+<button onclick="withdraw()" class="contact100-form-btn">
 <span>
-Sign In
+Update
 <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 </span>
 </button>
@@ -152,14 +130,6 @@ Sign In
 
 
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script>
-
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../static/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -183,7 +153,7 @@ Sign In
 <script src="../static/vendor/countdowntime/countdowntime.js"></script>
 
 <!--<script src="../static/js/main.js"></script>-->
-<script src="../static/js/login.js"></script>
+<script src="../static/js/app.js"></script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
@@ -194,65 +164,6 @@ Sign In
   gtag('config', 'UA-23581568-13');
 </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"7a7cce9b7f939d04","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.2.0","si":100}' crossorigin="anonymous"></script>
-
-
-
-
-<script type="text/javascript">
-	
-
-var firebaseConfig = {
-    apiKey: "AIzaSyAsqNEmJruurMvi03ycdQgxLQdO95wpWiM",
-    authDomain: "easmanagement-52782.firebaseapp.com",
-    databaseURL: "https://easmanagement-52782-default-rtdb.firebaseio.com",
-    projectId: "easmanagement-52782",
-    storageBucket: "easmanagement-52782.appspot.com",
-    messagingSenderId: "343583306103",
-    appId: "1:343583306103:web:c8008df6e954482d043172",
-    measurementId: "G-DHQ88EVSF8"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics(); 
-
-const database = firebase.database();
-
-
-var emailID = document.getElementById("emailID");
-var passID = document.getElementById("passID");
-
-function SignIn() {
-	swal("Please wait ...");
-	console.log(emailID.value);
-	if(emailID.value != "" && passID.value != "" ){
-		firebase.auth().signInWithEmailAndPassword(emailID.value, passID.value)
-		  .then((userCredential) => {
-		    // Signed in
-		    var user = userCredential.user;
-		    console.log(user);
-		    location.replace("http://85.90.245.83");
-		    //location.replace("http://localhost:5000");
-		    //location.replace("https://myeamanager-0bcaf00bab72.herokuapp.com/");
-		    swal("Success","Logged in successfully","success");
-		  })
-		  .catch((error) => {
-		    var errorCode = error.code;
-		    var errorMessage = error.message;
-		    console.log(errorMessage);
-		    swal("Failed","Sign in failed try again","error");
-		  });
-
-	 }else{
-	 	swal("Failed","Enter username,try again","error");
-	 }
-}
-
-
-</script>
-
-
-
-
 </body>
 
 </html>
