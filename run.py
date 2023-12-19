@@ -1,5 +1,6 @@
 
 import firebase_admin
+import time
 from firebase_admin import credentials
 from firebase_admin import db
 from flask import Flask,request,jsonify,json,Response,render_template,url_for,redirect
@@ -168,7 +169,7 @@ def deinit():
 						status_list.append(sts)
 						direction_list.append(drn)
 
-		print("**************DEINIT*************************")
+		
 		
 		allowed_symbols = '-'.join(symbols_list)
 		symbols_status = '-'.join(status_list)
@@ -180,6 +181,8 @@ def deinit():
 		mql_balance = mql_data["balance"]
 		mql_equity = mql_data["equity"]
 		account = mql_data["account"]
+		print("**************DEINIT*************************")
+
 
 		symbol_broker_list = mql_symbol0.split("**")
 		mql_symbol = symbol_broker_list[0]
@@ -199,6 +202,10 @@ def deinit():
 			        symbol_number_dict[symbol] = number
 			for symbol, number in symbol_number_dict.items():
 			    SymbolRef.child(symbol.upper()).child("Accounts/"+str(account)).delete()
+			    print(symbol.upper())
+			    print(str(account))
+			    time.sleep(1)
+
 
 			
 			res = jsonify({
