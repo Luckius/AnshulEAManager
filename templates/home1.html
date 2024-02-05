@@ -323,7 +323,7 @@ css testing
 
     .nav-logo:hover {
         /*color: #ffc107;*/
-        color: #F0C993;
+        color: #17a2b8;
         text-decoration: none;
     }
 
@@ -737,7 +737,7 @@ $(document).ready(function(){
                     <tr style="color: white;">
                         <th title="Sort" onclick="sortTable(0)">Symbol<span id="span1">▼</span></th>
                         <th title="Sort" onclick="sortTable(1)">Status<span id="span2">▼</span></th>
-                        <th title="Sort" onclick="sortTable(2)">PNL<span id="span3">▼</span></th>
+                        <!--<th title="Sort" onclick="sortTable(2)">PNL<span id="span3">▼</span></th>-->
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -746,7 +746,7 @@ $(document).ready(function(){
                     <tr>
                         <td>AUDUSD</td>
                         <td>Stopped</td>
-                        <td>3.2</td>
+                        <!--<td>3.2</td>-->
                         <td>
 
                             <div class="icons-de"> 
@@ -1042,7 +1042,7 @@ $(document).ready(function(){
         const PNL = item.PNL;
         if(symbol != undefined){
             var newRow = document.createElement("tr");
-            newRow.innerHTML = '<td>'+symbol+'</td><td>'+status+'</td><td>'+PNL+'</td><td><div class="icons-de"><a ><i id="playID" class="fa-solid fa-play" style="color: #048130;"></i></a><a><i id="stopID" class="fa-solid fa-stop" style="color: #d20423;"></i></a></div></td>';
+            newRow.innerHTML = '<td>'+symbol+'</td><td>'+status+'</td><td><div class="icons-de"><a ><i id="playID" class="fa-solid fa-play" style="color: #048130;"></i></a><a><i id="stopID" class="fa-solid fa-stop" style="color: #d20423;"></i></a></div></td>';
             
             tbody.appendChild(newRow);
         }
