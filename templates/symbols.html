@@ -677,7 +677,7 @@ firebase.auth().onAuthStateChanged((user) => {
     // ...
   } else {
     //location.replace("http://localhost:5000/login");
-    location.replace("http://www.fxeamanager.com/login");
+    location.replace("https://www.fxeamanager.com/login");
     //location.replace("http://85.90.245.83/login");
   }
 });
@@ -687,7 +687,8 @@ firebase.auth().onAuthStateChanged((user) => {
 function SignOut(){
     firebase.auth().signOut().then(() => {
       // Sign-out successful.
-      location.replace("http://85.90.245.83/login");
+      //location.replace("http://85.90.245.83/login");
+      location.replace("https://www.fxeamanager.com/login");
     }).catch((error) => {
       // An error happened.
     });
