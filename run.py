@@ -83,15 +83,12 @@ def getdata():
 		#print(symbols_list)
 		#print(status_list)
 		#print(direction_list)
-		try:
-			allowed_symbols = '-'.join(symbols_list)
-			symbols_status = '-'.join(status_list)
-			my_direction = '-'.join(direction_list)
-		except Exception as e:
-			Print("Error occured as: ",e);
+		allowed_symbols = '-'.join(symbols_list)
+		symbols_status = '-'.join(status_list)
+		my_direction = '-'.join(direction_list)
 		mql_data = request.get_json()
 		#print(mql_data)
-		print(allowed_symbols)
+		#print(allowed_symbols)
 		mPNL = mql_data["PNL"]
 		Eqt = mql_data["Eqt"]
 		mql_symbol0 = mql_data["symbol"]
